@@ -1,0 +1,6 @@
+@ConceitusERP.Web_HostAddress = http://localhost:5083
+
+GET {{ConceitusERP.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
