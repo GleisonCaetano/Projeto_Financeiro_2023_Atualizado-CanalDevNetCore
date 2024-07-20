@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Domain.Notifications
 {
     public class Notify
@@ -30,7 +32,7 @@ namespace Domain.Notifications
             return true;
         }
 
-        public bool IntPropertyValidation(string valor, string nomePropriedade)
+        public bool IntPropertyValidation(int valor, string nomePropriedade)
         {
             if (valor < 1 || string.IsNullOrWhiteSpace(nomePropriedade))
             {

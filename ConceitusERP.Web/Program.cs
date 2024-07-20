@@ -1,3 +1,9 @@
+using Data.Configuration;
+using Data.Repositories.Generics;
+using Domain.Entities;
+using Domain.Interfaces.Generics;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextBase>( options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDefaultIdentity<Usuario>( options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>( options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
 
 //Interface and Repository

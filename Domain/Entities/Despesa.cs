@@ -1,3 +1,7 @@
+using Domain.Common;
+using Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Domain.Entities
 {
     public class Despesa : Base

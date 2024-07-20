@@ -1,3 +1,5 @@
+using Domain.Common;
+
 namespace Domain.Entities
 {
     public class SistemaFinanceiro : Base

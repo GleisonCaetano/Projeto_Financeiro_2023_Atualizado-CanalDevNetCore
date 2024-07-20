@@ -1,6 +1,10 @@
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
 namespace Data.Configuration
 {
-    public class ContextBase : IdentityDbContext<Usuario>
+    public class ContextBase : IdentityDbContext<ApplicationUser>
     {
         public ContextBase(DbContextOptions options) : base(options)
         {
@@ -22,13 +26,13 @@ namespace Data.Configuration
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Usuario>().ToTable("AspNetUsers").HasKey(t => t.Id);
+            builder.Entity<ApplicationUser>().ToTable("AspNetUsers").HasKey(t => t.Id);
             base.OnModelCreating(builder);
         }
 
         public string GetConnectionString()
         {
-            return "Server=localhost\SQLEXPRESS;Database=SistemaFinanceiroDB;Integrated Security=False;User ID=sa;Password=Admin1234;Trusted_Connection=True;";
+            return "Server=localhost/SQLEXPRESS;Database=SistemaFinanceiroDB;Integrated Security=False;User ID=sa;Password=Admin1234;Trusted_Connection=True;";
         }
     }
 }

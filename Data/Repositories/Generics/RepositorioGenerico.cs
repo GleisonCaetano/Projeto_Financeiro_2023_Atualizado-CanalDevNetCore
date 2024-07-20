@@ -1,3 +1,9 @@
+using Data.Configuration;
+using Domain.Interfaces.Generics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32.SafeHandles;
+using System.Runtime.InteropServices;
+
 namespace Data.Repositories.Generics
 {
     public class RepositorioGenerico<T> : InterfaceGenerica<T>, IDisposable where T : class
@@ -21,7 +27,7 @@ namespace Data.Repositories.Generics
         {
             using (var data = new ContextBase(_optionsBuilder))
             {
-                data.Set<T>().UpdateAsync(Objeto);
+                data.Set<T>().Update(Objeto);
                 await data.SaveChangesAsync();
             }
         }
@@ -30,7 +36,7 @@ namespace Data.Repositories.Generics
         {
             using (var data = new ContextBase(_optionsBuilder))
             {
-                await data.Set<T>().Remove(Objeto);
+                data.Set<T>().Remove(Objeto);
                 await data.SaveChangesAsync();
             }
         }

@@ -1,3 +1,6 @@
+using Domain.Notifications;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Domain.Common
 {
     public class Base : Notify
