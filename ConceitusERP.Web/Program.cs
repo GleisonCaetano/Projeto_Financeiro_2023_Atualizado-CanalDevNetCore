@@ -1,7 +1,12 @@
+using ConceitusERP.Data.Repositories;
 using Data.Configuration;
 using Data.Repositories.Generics;
 using Domain.Entities;
 using Domain.Interfaces.Generics;
+using Domain.Interfaces.ICategoria;
+using Domain.Interfaces.IDespesa;
+using Domain.Interfaces.ISistemaFinanceiro;
+using Domain.Interfaces.IUsuarioSistemaFinanceiro;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +25,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>( options => options.SignIn.
 
 //Interface and Repository
 builder.Services.AddSingleton(typeof(InterfaceGenerica<>), typeof(RepositorioGenerico<>));
+builder.Services.AddSingleton<InterfaceCategoria, RepositorioCategoria>();
+builder.Services.AddSingleton<InterfaceDespesa, RepositorioDespesa>();
+builder.Services.AddSingleton<InterfaceSistemaFinanceiro, RepositorioSistemaFinanceiro>();
+builder.Services.AddSingleton<InterfaceUsuarioSistemaFinanceiro, RepositorioUsuarioSistemaFinanceiro>();
 
 var app = builder.Build();
 

@@ -7,7 +7,7 @@ namespace Domain.Entities
         [Column(Order = 1)]
         public int Id { get; set; }
         [Column(Order = 2)]
-        public string Email { get; set; }
+        public string EmailUsuario { get; set; }
         [Column(Order = 3)]
         public bool Administrador { get; set; }
         [Column(Order = 4)]
