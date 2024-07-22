@@ -1,3 +1,4 @@
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,6 @@ namespace Domain.Interfaces.InterfaceServicos
 {
     public interface IUsuarioSistemaFinanceiroServico
     {
-        
+        Task CadastrarUsuarioNoSistema(UsuarioSistemaFinanceiro usuarioSistemaFinanceiro);
     }
 }
