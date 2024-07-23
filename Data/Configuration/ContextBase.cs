@@ -32,7 +32,7 @@ namespace Data.Configuration
 
         public string GetConnectionString()
         {
-            return "Server=localhost/SQLEXPRESS;Database=SistemaFinanceiroDB;Integrated Security=False;User ID=sa;Password=Admin1234;Trusted_Connection=True;";
+            return "Data Source=Gleison-G15\\SQLEXPRESS;Database=SistemaFinanceiroDB;User ID=sa;Password=Admin1234;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;";
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ConceitusERP.Data.Repositories
             _optionsBuilder = new DbContextOptions<ContextBase>();
         }
 
-        public async Task<IList<Despesa>> ListarDespesasUsusario(string emailUsuario)
+        public async Task<IList<Despesa>> ListarDespesasUsuario(string emailUsuario)
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
@@ -29,7 +29,7 @@ namespace ConceitusERP.Data.Repositories
             }
         }
 
-        public async Task<IList<Despesa>> ListarDespesasUsusarioNaoPagasMesesAnteriores(string emailUsuario)
+        public async Task<IList<Despesa>> ListarDespesasUsuarioNaoPagasMesesAnteriores(string emailUsuario)
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {

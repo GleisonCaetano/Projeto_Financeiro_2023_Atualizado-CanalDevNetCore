@@ -9,6 +9,6 @@ namespace Domain.Common
         public int Id { get; set; }
         [Column(Order = 2)]
         public string Nome { get; set; }
-        public bool Exluido { get; set; }
+        public bool Excluido { get; set; }
     }
 }

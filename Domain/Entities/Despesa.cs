@@ -30,6 +30,6 @@ namespace Domain.Entities
         [ForeignKey("Categoria")]
         [Column(Order = 13)]
         public int CategoriaId { get; set; }
-        public virtual Categoria Categoria { get; set; }
+        //public virtual Categoria Categoria { get; set; }
     }
 }

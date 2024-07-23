@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.IDespesa;
 using Domain.Interfaces.InterfaceServicos;
+using Domain.Enums;
 
 namespace ConceitusERP.Domain.Servicos
 {
@@ -38,6 +39,33 @@ namespace ConceitusERP.Domain.Servicos
 
             if (valido)
                 await _interfaceDespesa.Update(despesa);
+        }
+
+        public async Task<object> CarregarGraficos(string emailUsuario)
+        {
+            var despesasUsuario = await _interfaceDespesa.ListarDespesasUsuario(emailUsuario);
+            var despesasAnteriores = await _interfaceDespesa.ListarDespesasUsuarioNaoPagasMesesAnteriores(emailUsuario);
+
+            var despesasNaoPagasMesesAnteriores = despesasAnteriores.Any() ?
+                despesasAnteriores.ToList().Sum(x => x.Valor) : 0;
+
+            var despesasPagas = despesasUsuario.Where(d => d.Pago && d.TipoDespesa == TipoDespesaEnum.Contas)
+                .Sum(x => x.Valor);
+
+            var despesasPendentes = despesasUsuario.Where(d => !d.Pago && d.TipoDespesa == TipoDespesaEnum.Contas)
+                .Sum(x => x.Valor);
+
+            var investimentos = despesasUsuario.Where(d => d.TipoDespesa == TipoDespesaEnum.Contas)
+                .Sum(x => x.Valor);
+
+            return new
+            {
+                sucesso = "OK",
+                despesasPagas = despesasPagas,
+                despesasPendentes = despesasPendentes,
+                despesasNaoPagasMesesAnteriores = despesasNaoPagasMesesAnteriores,
+                investimentos = investimentos
+            };
         }
     }
 }

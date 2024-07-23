@@ -8,6 +8,6 @@ namespace Domain.Entities
         [ForeignKey("SistemaFinanceiro")]
         [Column(Order = 3)]
         public int SistemaId { get; set; }
-        public virtual SistemaFinanceiro SistemaFinanceiro { get; set; }
+        //public virtual SistemaFinanceiro SistemaFinanceiro { get; set; }
     }
 }
