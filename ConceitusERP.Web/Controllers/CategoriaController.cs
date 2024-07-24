@@ -1,13 +1,13 @@
-﻿using Domain.Entities;
-using Domain.Interfaces.ICategoria;
-using Domain.Interfaces.InterfaceServicos;
+﻿using ConceitusERP.Domain.Entities;
+using ConceitusERP.Domain.Interfaces.ICategoria;
+using ConceitusERP.Domain.Interfaces.InterfaceServicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConceitusERP.Web.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize]
     public class CategoriaController : ControllerBase
     {
         private readonly InterfaceCategoria _interfaceCategoria;

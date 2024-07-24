@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConceitusERP.Data\ConceitusERP.Data.csproj" />
+    <ProjectReference Include="..\ConceitusERP.Domain\ConceitusERP.Domain.csproj" />
     <ProjectReference Include="..\Data\ConceitusERP.Data.csproj" />
   </ItemGroup>
 

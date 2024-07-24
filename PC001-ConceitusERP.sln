@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConceitusERP.Domain", "Domain\ConceitusERP.Domain.csproj", "{96119138-E196-4C4B-83F6-1429BA6F9062}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Tests", "0-Tests", "{3075E269-3ABB-4E41-9B38-B9C3405268CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Infrastructure", "1-Infrastructure", "{0C8A10F7-3674-4EBB-9218-79303AC37DB5}"
@@ -19,11 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1-Data", "1.1-Data", "{EB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2-CrossCutting", "1.2-CrossCutting", "{8309BED8-0D8A-40D0-A01F-9C96B5E870BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConceitusERP.Data", "Data\ConceitusERP.Data.csproj", "{E2ED947C-6D68-41BE-9585-0A161C8D8723}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceitusERP.Application", "ConceitusERP.Application\ConceitusERP.Application.csproj", "{D8EA0782-20F9-4E86-A196-125B6DD0B904}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConceitusERP.Application", "ConceitusERP.Application\ConceitusERP.Application.csproj", "{D8EA0782-20F9-4E86-A196-125B6DD0B904}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceitusERP.Web", "ConceitusERP.Web\ConceitusERP.Web.csproj", "{014F4E2A-F455-4028-8109-C6893251AE98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConceitusERP.Web", "ConceitusERP.Web\ConceitusERP.Web.csproj", "{014F4E2A-F455-4028-8109-C6893251AE98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceitusERP.Domain", "ConceitusERP.Domain\ConceitusERP.Domain.csproj", "{8542CA15-241D-4A9F-9214-78AB50A7C74F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceitusERP.Data", "ConceitusERP.Data\ConceitusERP.Data.csproj", "{13101897-D978-4DC8-A427-D3FD40AC6BAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{96119138-E196-4C4B-83F6-1429BA6F9062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96119138-E196-4C4B-83F6-1429BA6F9062}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96119138-E196-4C4B-83F6-1429BA6F9062}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96119138-E196-4C4B-83F6-1429BA6F9062}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2ED947C-6D68-41BE-9585-0A161C8D8723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2ED947C-6D68-41BE-9585-0A161C8D8723}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2ED947C-6D68-41BE-9585-0A161C8D8723}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2ED947C-6D68-41BE-9585-0A161C8D8723}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D8EA0782-20F9-4E86-A196-125B6DD0B904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8EA0782-20F9-4E86-A196-125B6DD0B904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8EA0782-20F9-4E86-A196-125B6DD0B904}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,17 +39,25 @@ Global
 		{014F4E2A-F455-4028-8109-C6893251AE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{014F4E2A-F455-4028-8109-C6893251AE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{014F4E2A-F455-4028-8109-C6893251AE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8542CA15-241D-4A9F-9214-78AB50A7C74F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8542CA15-241D-4A9F-9214-78AB50A7C74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8542CA15-241D-4A9F-9214-78AB50A7C74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8542CA15-241D-4A9F-9214-78AB50A7C74F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13101897-D978-4DC8-A427-D3FD40AC6BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13101897-D978-4DC8-A427-D3FD40AC6BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13101897-D978-4DC8-A427-D3FD40AC6BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13101897-D978-4DC8-A427-D3FD40AC6BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{96119138-E196-4C4B-83F6-1429BA6F9062} = {AD793EF5-C0E8-4E6D-B873-42B58C698AFA}
 		{EBB415A2-5985-40EA-ABCB-D3B07DC183FF} = {0C8A10F7-3674-4EBB-9218-79303AC37DB5}
 		{8309BED8-0D8A-40D0-A01F-9C96B5E870BB} = {0C8A10F7-3674-4EBB-9218-79303AC37DB5}
-		{E2ED947C-6D68-41BE-9585-0A161C8D8723} = {EBB415A2-5985-40EA-ABCB-D3B07DC183FF}
 		{D8EA0782-20F9-4E86-A196-125B6DD0B904} = {416DC249-947C-4CBB-9ED5-900FB14559E4}
 		{014F4E2A-F455-4028-8109-C6893251AE98} = {FD883E1C-54CD-4133-AB8D-9AED2CA3D141}
+		{8542CA15-241D-4A9F-9214-78AB50A7C74F} = {AD793EF5-C0E8-4E6D-B873-42B58C698AFA}
+		{13101897-D978-4DC8-A427-D3FD40AC6BAE} = {EBB415A2-5985-40EA-ABCB-D3B07DC183FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B784C20-FFB4-41EA-ADC1-1B46E56BFC4C}

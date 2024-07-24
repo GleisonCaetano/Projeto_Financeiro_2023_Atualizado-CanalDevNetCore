@@ -1,6 +1,6 @@
-using Domain.Entities;
-using Domain.Interfaces.InterfaceServicos;
-using Domain.Interfaces.IUsuarioSistemaFinanceiro;
+using ConceitusERP.Domain.Entities;
+using ConceitusERP.Domain.Interfaces.InterfaceServicos;
+using ConceitusERP.Domain.Interfaces.IUsuarioSistemaFinanceiro;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Domain.Entities;
+using ConceitusERP.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using ConceitusERP.Web.Token;
 using ConceitusERP.Web.Models;

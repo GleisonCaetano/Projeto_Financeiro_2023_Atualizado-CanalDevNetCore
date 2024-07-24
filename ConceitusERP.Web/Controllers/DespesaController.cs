@@ -1,8 +1,8 @@
 ﻿using ConceitusERP.Domain.Servicos;
-using Domain.Entities;
-using Domain.Interfaces.ICategoria;
-using Domain.Interfaces.IDespesa;
-using Domain.Interfaces.InterfaceServicos;
+using ConceitusERP.Domain.Entities;
+using ConceitusERP.Domain.Interfaces.ICategoria;
+using ConceitusERP.Domain.Interfaces.IDespesa;
+using ConceitusERP.Domain.Interfaces.InterfaceServicos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConceitusERP.Web.Controllers
