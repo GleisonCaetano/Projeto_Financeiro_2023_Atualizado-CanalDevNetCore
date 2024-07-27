@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,21 +15,29 @@ import { RouterOutlet } from '@angular/router';
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   
-  constructor(public formBuilder: FormBuilder, private router: Router){
+  constructor(public formBuilder: FormBuilder, private router: Router, private loginService: LoginService){
   
     this.loginForm = this.formBuilder.group({
         email: ['',[Validators.required, Validators.email]],
         senha: ['',[Validators.required]]
-      });
-    }
+    });
+  }
 
-    ngOnInit():void{}
+  ngOnInit():void{}
 
-    get dadosForm(){
-      return this.loginForm.controls;
-    }
+  get dadosForm(){
+    return this.loginForm.controls;
+  }
 
-    loginUser(){
-      alert("OK")
-    }
+  loginUser(){
+    this.loginService.login(this.dadosForm["email"].value, this.dadosForm["senha"].value).subscribe(
+      token => {
+        alert(token);
+        this.router.navigate(['/dashboard']);
+      },
+      err =>{
+        alert('Ocorreu um erro');
+      }
+    )
+  }
 }
