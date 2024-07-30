@@ -4,7 +4,7 @@ import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { MenuService } from '../../services/menu.services';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'dashboard',
   standalone: true,
   imports: [NavbarComponent, SidebarComponent],
   templateUrl: './dashboard.component.html',

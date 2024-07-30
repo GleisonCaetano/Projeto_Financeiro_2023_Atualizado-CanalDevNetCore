@@ -1,2 +1,37 @@
 <navbar></navbar>
 <sidebar></sidebar>
+
+<div class="container-base">
+    <div class="content-page">
+        <div class="card-header">
+            <div class="card-title">
+                Cadastro de Despesas
+            </div>
+        </div>
+
+        <form class="form-page" [formGroup]="despesaForm" (submit)="enviar()">
+            <div class="row">
+                <div class="group-row">
+                    <label>Nome</label>
+                    <input type="text" name="name" id="name" placeholder="Digite o nome do sistema" formControlName="name" required />
+                    <label class="error-input" *ngIf="despesaForm.get('name')?.errors?.['required'] && despesaForm.get('name')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Sistemas</label>
+                    <ng-select class="select-padrao" [(ngModel)]="sistemaSelect" formControlName="sistemaSelect" [items]="listSistemas" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="false"></ng-select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <input type="submit" value="Salvar" class="btn-primary"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

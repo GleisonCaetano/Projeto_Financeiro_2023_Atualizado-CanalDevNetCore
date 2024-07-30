@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.services';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
@@ -14,7 +14,7 @@ import { SelectModel } from '../../models/SelectModel';
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 })
-export class CategoriaComponent {
+export class CategoriaComponent implements OnInit {
   categoriaForm: FormGroup;
   listSistemas = new Array<SelectModel>();
   sistemaSelect = new SelectModel();
@@ -22,8 +22,7 @@ export class CategoriaComponent {
   constructor(public menuService: MenuService, public formBuilder: FormBuilder){
     this.categoriaForm = this.formBuilder.group({
       name:['', [Validators.required]],
-      listSistemas: this.listSistemas,
-      sistemaSelect: this.sistemaSelect
+      sistemaSelect: [null]
     });
   }
   
@@ -38,6 +37,6 @@ export class CategoriaComponent {
   enviar(){
     debugger
     var dados = this.dadosForm();
-    alert(dados["name"].value)
+    alert(dados["name"].value);
   }
 }
