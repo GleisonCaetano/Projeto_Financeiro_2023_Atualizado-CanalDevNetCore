@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "@ng-select/ng-select/themes/default.theme.css";
 
 body {
     font-family: "Poppins";
@@ -87,4 +88,31 @@ label{}
             }
         }
     }
+}
+
+.select-padrao{
+    background: #fefefe;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 160%;
+    color: #1e1e1e;
+    width: 379px;
+    height: 36px;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container{
+    height: 36px !important;
+}
+
+::ng-deep .ng-select .ng-select-container{
+    color: #333;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #acacac;
+    min-height: 36px;
+    align-items: center;
 }
