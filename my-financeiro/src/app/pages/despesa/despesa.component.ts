@@ -18,11 +18,16 @@ export class DespesaComponent implements OnInit {
   despesaForm: FormGroup;
   listSistemas = new Array<SelectModel>();
   sistemaSelect = new SelectModel();
+  listCategorias = new Array<SelectModel>();
+  categoriaSelect = new SelectModel();
   
   constructor(public menuService: MenuService, public formBuilder: FormBuilder){
     this.despesaForm = this.formBuilder.group({
       name:['', [Validators.required]],
-      sistemaSelect: [null]
+      valor:['', Validators.required],
+      data:['', Validators.required],
+      sistemaSelect:['', Validators.required],
+      categoriaSelect:['', Validators.required]
     });
   }
   

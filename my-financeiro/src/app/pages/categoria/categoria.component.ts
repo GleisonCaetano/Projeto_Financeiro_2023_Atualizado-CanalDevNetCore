@@ -22,7 +22,7 @@ export class CategoriaComponent implements OnInit {
   constructor(public menuService: MenuService, public formBuilder: FormBuilder){
     this.categoriaForm = this.formBuilder.group({
       name:['', [Validators.required]],
-      sistemaSelect: [null]
+      sistemaSelect:['', [Validators.required]]
     });
   }
   

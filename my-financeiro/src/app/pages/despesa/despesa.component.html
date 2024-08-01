@@ -22,8 +22,35 @@
 
             <div class="row">
                 <div class="group-row">
+                    <label>Valor</label>
+                    <input type="number" name="valor" id="valor" placeholder="Digite o valor da despesa" formControlName="valor" required />
+                    <label class="error-input" *ngIf="despesaForm.get('valor')?.errors?.['required'] && despesaForm.get('valor')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Data de Vencimento</label>
+                    <input type="date" name="data" id="data" placeholder="Digite a data de vencimento da despesa" formControlName="data" required />
+                    <label class="error-input" *ngIf="despesaForm.get('data')?.errors?.['required'] && despesaForm.get('data')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
                     <label>Sistemas</label>
                     <ng-select class="select-padrao" [(ngModel)]="sistemaSelect" formControlName="sistemaSelect" [items]="listSistemas" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="false"></ng-select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Categorias</label>
+                    <ng-select class="select-padrao" [(ngModel)]="categoriaSelect" formControlName="categoriaSelect" [items]="listCategorias" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="false"></ng-select>
                 </div>
             </div>
 
