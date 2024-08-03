@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'login',
@@ -15,7 +16,11 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   
-  constructor(public formBuilder: FormBuilder, private router: Router, private loginService: LoginService){
+  constructor(
+    public formBuilder: FormBuilder, 
+    private router: Router, 
+    private loginService: LoginService, 
+    public authService: AuthService){
   
     this.loginForm = this.formBuilder.group({
         email: ['',[Validators.required, Validators.email]],
@@ -32,6 +37,8 @@ export class LoginComponent implements OnInit{
   loginUser(){
     this.loginService.login(this.dadosForm["email"].value, this.dadosForm["senha"].value).subscribe(
       token => {
+        this.authService.setToken(token);
+        this.authService.usuarioAutenticado(true);
         this.router.navigate(['/dashboard']);
       },
       err =>{
