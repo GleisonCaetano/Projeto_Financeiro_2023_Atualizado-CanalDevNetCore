@@ -35,7 +35,18 @@ export class SistemaComponent {
     debugger
     var dados = this.dadosForm();
     let item = new SistemaFinanceiro();
+    item.Id = 0;
     item.Nome = dados["name"].value;
+    item.Mes = 0;
+    item.Ano = 0;
+    item.DiaFechamento = 0;
+    item.GerarCopiaDespesa=true;
+    item.MesCopia = 0;
+    item.AnoCopia = 0;
+
+    item.NomePropriedade = "";
+    item.Mensagem = "";
+    item.Notificacoes = [];
     
     this.sistemaService.AdicionarSistemaFinanceiro(item).subscribe((response: SistemaFinanceiro) => {
       this.sistemaForm.reset();

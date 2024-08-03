@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
         this.authService.usuarioAutenticado(true);
         this.router.navigate(['/dashboard']);
       },
-      err =>{
+      err => {
         alert('Ocorreu um erro');
       }
     )
