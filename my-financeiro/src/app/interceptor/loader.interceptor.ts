@@ -1,10 +1,9 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, throwError } from "rxjs";
-import { catchError, finalize, map } from "rxjs/operators";
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService } from "../services/auth.service";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, catchError, finalize, map, Observable, throwError } from "rxjs";
 
 @Injectable()
 export class HttpStatus{
@@ -28,17 +27,15 @@ export class LoaderInterceptor implements HttpInterceptor{
     private requests = 0;
 
     constructor(
-        private spinner: NgxSpinnerService,
-        private status: HttpStatus,
-        private authService: AuthService,
-        private router: Router
-    ){}
+        private spinner: NgxSpinnerService, 
+        private status: HttpStatus, 
+        private authService: AuthService, 
+        private router: Router){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>>{
-        ++this.requests; //Contar a quantidade de requests
+        this.requests++; //Contar a quantidade de requests
         let headers;
-        
-        //api.ipify.org retorna o IP
+
         if (req.url.includes('api.ipify.org')) {
             headers: new HttpHeaders({
                 contentType: "false",
@@ -55,9 +52,9 @@ export class LoaderInterceptor implements HttpInterceptor{
         else {
             debugger
             headers = new HttpHeaders()
-                .append("accept", "application/json")
-                .append("Content-Type", "application/json")
-                .append("Authorization", "Bearer " + this.authService.getToken);
+            .append("accept", "application/json")
+            .append("Content-Type", "application/json")
+            .append("Authorization", "Bearer " + this.authService.getToken);
         }
 
         let request = req.clone({ headers });
@@ -70,12 +67,13 @@ export class LoaderInterceptor implements HttpInterceptor{
             }),
             catchError((error: Response) => {
                 if (error.status === 401) {
-                    this.router.navigate(["/ROTA-A-DEFINIR- 401 Unauthorized"]);
+                    //TODO: Depois redirecionar: this.router.navigate(["ROTA-A-DEFINIR- 401 Unauthorized"]);
+                    alert("Usuário não autorizado");
                 }
                 return throwError(error);
             }),
             finalize(() => {
-                --this.requests;
+                this.requests--;
                 this.status.setHttpStatus(this.requests > 0);
                 this.status.getHttpStatus().subscribe((status: boolean) => {
                     if (!status)

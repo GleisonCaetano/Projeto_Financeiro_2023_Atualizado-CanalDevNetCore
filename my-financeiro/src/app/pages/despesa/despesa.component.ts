@@ -28,7 +28,7 @@ export class DespesaComponent implements OnInit {
       data:['', Validators.required],
       sistemaSelect:['', Validators.required],
       categoriaSelect:['', Validators.required]
-    });
+    })
   }
   
   ngOnInit(){

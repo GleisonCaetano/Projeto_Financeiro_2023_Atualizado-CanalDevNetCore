@@ -7,8 +7,8 @@ export class SistemaFinanceiro{
     GerarCopiaDespesa: boolean = true;
     MesCopia: number = 0;
     AnoCopia: number = 0;
+    Excluido: boolean = false;
 
     NomePropriedade: string = "";
     Mensagem: string = "";
-    Notificacoes: [] = [];
 }

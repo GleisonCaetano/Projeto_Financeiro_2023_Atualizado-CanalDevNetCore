@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'login',
@@ -13,9 +14,9 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
   loginForm: FormGroup;
-  
+
   constructor(
     public formBuilder: FormBuilder, 
     private router: Router, 
@@ -27,8 +28,6 @@ export class LoginComponent implements OnInit{
         senha: ['',[Validators.required]]
     });
   }
-
-  ngOnInit():void{}
 
   get dadosForm(){
     return this.loginForm.controls;
@@ -44,6 +43,5 @@ export class LoginComponent implements OnInit{
       err => {
         alert('Ocorreu um erro');
       }
-    )
-  }
+    )}
 }

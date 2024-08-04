@@ -20,7 +20,7 @@ export class SistemaComponent {
   constructor(public menuService: MenuService, public formBuilder: FormBuilder, public sistemaService: SistemaService){
     this.sistemaForm = this.formBuilder.group({
       name:['', [Validators.required]]
-    });
+    })
   }
   
   ngOnInit(){
@@ -43,14 +43,14 @@ export class SistemaComponent {
     item.GerarCopiaDespesa=true;
     item.MesCopia = 0;
     item.AnoCopia = 0;
+    item.Excluido = false;
 
     item.NomePropriedade = "";
     item.Mensagem = "";
-    item.Notificacoes = [];
     
     this.sistemaService.AdicionarSistemaFinanceiro(item).subscribe((response: SistemaFinanceiro) => {
       this.sistemaForm.reset();
-      this.sistemaService.CadastratarUsuarioNoSistema(response.Id, "gleison.resident@hotmail.com").subscribe((response: any) => {
+      this.sistemaService.CadastrarUsuarioNoSistema(response.Id, "gleison.resident@hotmail.com").subscribe((response: any) => {
         debugger
       },
       (error) => console.error(error), () => {})

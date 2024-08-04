@@ -17,6 +17,7 @@ export class AuthService{
         return Promise.resolve(true);
     }
 
+    //Salvar status que o usuário foi autenticado no portal
     usuarioAutenticado(status: boolean){
         localStorage.setItem('usuarioAutenticadoPortal', JSON.stringify(status));
         this.usuarioAutenticadoPortal = status;
@@ -29,15 +30,15 @@ export class AuthService{
     }
 
     //Setar o token no LocalStorage
-    setToken(token: string){
-        localStorage.setItem('token', token);
-        this.token = token;
+    setToken(token: string) {
+      localStorage.setItem('token', token);
+      this.token = token;
     }
 
     //Pegar um usuário do LocalStorage
-    getToken(){
-        this.token = localStorage.getItem('token');
-        return this.token;
+    get getToken() {
+      this.token = localStorage.getItem('token');
+      return this.token;
     }
 
     //Limpar as variáveis de Token e Usuário

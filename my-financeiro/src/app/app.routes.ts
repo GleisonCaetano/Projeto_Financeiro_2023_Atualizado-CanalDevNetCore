@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SistemaComponent } from './pages/sistema/sistema.component';
+import { CategoriaComponent } from './pages/categoria/categoria.component';
+import { DespesaComponent } from './pages/despesa/despesa.component';
 
 export const routes: Routes = [
     {
@@ -14,22 +18,22 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+        component: DashboardComponent,
         canActivate: [AuthGuard]
     },
     {
         path: 'sistema',
-        loadChildren: () => import('./pages/sistema/sistema.module').then(m => m.SistemaModule),
+        component: SistemaComponent,
         canActivate: [AuthGuard]
     },
     {
         path: 'categoria',
-        loadChildren: () => import('./pages/categoria/categoria.module').then(m => m.CategoriaModule),
+        component: CategoriaComponent,
         canActivate: [AuthGuard]
     },
     {
         path: 'despesa',
-        loadChildren: () => import('./pages/despesa/despesa.module').then(m => m.DespesaModule),
+        component: DespesaComponent,
         canActivate: [AuthGuard]
     }
 ];
