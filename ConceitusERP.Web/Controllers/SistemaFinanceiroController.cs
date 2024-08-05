@@ -33,7 +33,7 @@ namespace ConceitusERP.Web.Controllers
         {
             await _iSistemaFinanceiroServico.AdicionarSistemaFinanceiro(sistemaFinanceiro);
 
-            return Task.FromResult(sistemaFinanceiro);
+            return sistemaFinanceiro;
         }
 
         [HttpPut("/api/AtualizarSistemaFinanceiro")]

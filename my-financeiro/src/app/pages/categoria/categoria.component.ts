@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuService } from '../../services/menu.services';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 })
-export class CategoriaComponent implements OnInit {
+export class CategoriaComponent {
   categoriaForm: FormGroup;
   listSistemas = new Array<SelectModel>();
   sistemaSelect = new SelectModel();
@@ -29,13 +29,14 @@ export class CategoriaComponent implements OnInit {
     public autService: AuthService) {
       this.categoriaForm = this.formBuilder.group({
         name:['', [Validators.required]],
-        sistemaSelect:['', [Validators.required]]
+        sistemaSelect:['', [Validators.required]]//,
+        //listSistemas: ['', [Validators.required]]
       });
     }
   
   ngOnInit(){
     this.menuService.menuSelecionado = 3;
-    this.ListarSistemasUsuario();
+    this.ListaSistemasUsuario();
   }
 
   dadosForm(){
@@ -48,11 +49,12 @@ export class CategoriaComponent implements OnInit {
     alert(dados["name"].value);
   }
 
-  ListarSistemasUsuario() {
-    this.sistemaService.ListarSistemasUsuario(this.autService.getEmailUser()).subscribe((response: any) => {
-      let listaSistemaFinanceiro: SelectModel[] = [];
-      response.forEach((x: any) => {
-        let item = new SelectModel();
+  ListaSistemasUsuario() {
+    this.sistemaService.ListarSistemasUsuario(this.autService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
+      var listaSistemaFinanceiro: [];
+      
+      response.forEach(x => {
+        var item = new SelectModel();
         item.id = x.Id.toString();
         item.name = x.Nome;
 
