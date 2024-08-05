@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { SistemaFinanceiro } from '../../models/SistemaFinanceiroModel';
 import { SistemaService } from '../../services/sistema.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'sistema',
@@ -17,11 +18,16 @@ import { SistemaService } from '../../services/sistema.service';
 export class SistemaComponent {
   sistemaForm: FormGroup;
   
-  constructor(public menuService: MenuService, public formBuilder: FormBuilder, public sistemaService: SistemaService){
-    this.sistemaForm = this.formBuilder.group({
-      name:['', [Validators.required]]
-    })
-  }
+  constructor(
+    public menuService: MenuService, 
+    public formBuilder: FormBuilder, 
+    public sistemaService: SistemaService, 
+    public authService: AuthService
+  ) {
+      this.sistemaForm = this.formBuilder.group({
+        name:['', [Validators.required]]
+      })
+    }
   
   ngOnInit(){
     this.menuService.menuSelecionado = 2;
@@ -50,7 +56,7 @@ export class SistemaComponent {
     
     this.sistemaService.AdicionarSistemaFinanceiro(item).subscribe((response: SistemaFinanceiro) => {
       this.sistemaForm.reset();
-      this.sistemaService.CadastrarUsuarioNoSistema(response.Id, "gleison.resident@hotmail.com").subscribe((response: any) => {
+      this.sistemaService.CadastrarUsuarioNoSistema(response.Id, this.authService.getEmailUser()).subscribe((response: any) => {
         debugger
       },
       (error) => console.error(error), () => {})
