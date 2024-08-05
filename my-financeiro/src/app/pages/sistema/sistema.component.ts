@@ -54,6 +54,7 @@ export class SistemaComponent {
     item.NomePropriedade = "";
     item.Mensagem = "";
     
+    debugger
     this.sistemaService.AdicionarSistemaFinanceiro(item).subscribe((response: SistemaFinanceiro) => {
       this.sistemaForm.reset();
       this.sistemaService.CadastrarUsuarioNoSistema(response.Id, this.authService.getEmailUser()).subscribe((response: any) => {
