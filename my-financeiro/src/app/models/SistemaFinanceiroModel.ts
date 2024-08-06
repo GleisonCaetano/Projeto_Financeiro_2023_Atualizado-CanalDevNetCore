@@ -1,6 +1,6 @@
 export class SistemaFinanceiro{
     id: number = 0;
-    Nome: string = "";
+    nome: string = "";
     Mes: number = 0;
     Ano: number = 0;
     DiaFechamento: number = 0;

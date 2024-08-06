@@ -40,7 +40,7 @@ export class SistemaComponent implements OnInit {
     var dados = this.dadosForm();
     let item = new SistemaFinanceiro();
     item.id = 0;
-    item.Nome = dados["name"].value;
+    item.nome = dados["name"].value;
     item.Mes = 0;
     item.Ano = 0;
     item.DiaFechamento = 0;

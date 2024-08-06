@@ -9,6 +9,7 @@ import { SelectModel } from '../../models/SelectModel';
 import { SistemaService } from '../../services/sistema.service';
 import { SistemaFinanceiro } from '../../models/SistemaFinanceiroModel';
 import { AuthService } from '../../services/auth.service';
+import { ItemsList } from '@ng-select/ng-select/lib/items-list';
 
 @Component({
   selector: 'categoria',
@@ -26,15 +27,14 @@ export class CategoriaComponent implements OnInit {
     public menuService: MenuService, 
     public formBuilder: FormBuilder, 
     public sistemaService: SistemaService, 
-    public autService: AuthService) {}
+    public autService: AuthService) {
+      this.categoriaForm = this.formBuilder.group({
+        name:['', [Validators.required]]
+      });
+    }
   
   ngOnInit(){
     this.menuService.menuSelecionado = 3;
-    this.categoriaForm = this.formBuilder.group({
-      name:['', [Validators.required]],
-      sistemaSelect:['', [Validators.required]],
-      listSistemas: ['', [Validators.required]]
-    });
     this.ListaSistemasUsuario();
   }
 
@@ -55,7 +55,7 @@ export class CategoriaComponent implements OnInit {
       response.forEach(x => {
         var item = new SelectModel();
         item.id = x.id ? x.id.toString() : '';
-        item.name = x.Nome;
+        item.name = x.nome;
 
         listaSistemaFinanceiro.push(item);
       });
