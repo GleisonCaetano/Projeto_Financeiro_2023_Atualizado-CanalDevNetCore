@@ -17,7 +17,7 @@ export class SistemaService{
         return this.httpClient.post<SistemaFinanceiro>(`${this.baseUrl}/AdicionarSistemaFinanceiro`, sistemaFinanceiro);
     }
 
-    ListarSistemasUsuario(emailUsuario: string) {//: Observable<Array<SistemaFinanceiro>> {
+    ListarSistemasUsuario(emailUsuario: string) : Observable<Array<SistemaFinanceiro>> {
         return this.httpClient.get<Array<SistemaFinanceiro>>(`${this.baseUrl}/ListarSistemasUsuario?emailUsuario=${emailUsuario}`);
     }
 

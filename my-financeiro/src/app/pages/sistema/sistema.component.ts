@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.services';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
@@ -15,33 +15,31 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './sistema.component.html',
   styleUrl: './sistema.component.scss'
 })
-export class SistemaComponent {
-  sistemaForm: FormGroup;
+export class SistemaComponent implements OnInit {
+  sistemaForm!: FormGroup;
   
   constructor(
     public menuService: MenuService, 
     public formBuilder: FormBuilder, 
     public sistemaService: SistemaService, 
     public authService: AuthService
-  ) {
-      this.sistemaForm = this.formBuilder.group({
-        name:['', [Validators.required]]
-      })
-    }
+  ) {}
   
   ngOnInit(){
     this.menuService.menuSelecionado = 2;
+    this.sistemaForm = this.formBuilder.group({
+      name:['', [Validators.required]]
+    })
   }
 
   dadosForm(){
     return this.sistemaForm.controls;
   }
 
-  enviar(){
-    debugger
+  enviar() {
     var dados = this.dadosForm();
     let item = new SistemaFinanceiro();
-    item.Id = 0;
+    item.id = 0;
     item.Nome = dados["name"].value;
     item.Mes = 0;
     item.Ano = 0;
@@ -56,7 +54,7 @@ export class SistemaComponent {
     
     this.sistemaService.AdicionarSistemaFinanceiro(item).subscribe((response: SistemaFinanceiro) => {
       this.sistemaForm.reset();
-      this.sistemaService.CadastrarUsuarioNoSistema(response.Id, this.authService.getEmailUser()).subscribe((response: any) => {
+      this.sistemaService.CadastrarUsuarioNoSistema(response.id, this.authService.getEmailUser()).subscribe((response: any) => {
         debugger
       },
       (error) => console.error(error), () => {})

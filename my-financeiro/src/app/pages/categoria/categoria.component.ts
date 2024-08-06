@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.services';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
@@ -17,8 +17,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './categoria.component.html',
   styleUrl: './categoria.component.scss'
 })
-export class CategoriaComponent {
-  categoriaForm: FormGroup;
+export class CategoriaComponent implements OnInit {
+  categoriaForm!: FormGroup;
   listSistemas = new Array<SelectModel>();
   sistemaSelect = new SelectModel();
   
@@ -26,16 +26,15 @@ export class CategoriaComponent {
     public menuService: MenuService, 
     public formBuilder: FormBuilder, 
     public sistemaService: SistemaService, 
-    public autService: AuthService) {
-      this.categoriaForm = this.formBuilder.group({
-        name:['', [Validators.required]],
-        sistemaSelect:['', [Validators.required]]//,
-        //listSistemas: ['', [Validators.required]]
-      });
-    }
+    public autService: AuthService) {}
   
   ngOnInit(){
     this.menuService.menuSelecionado = 3;
+    this.categoriaForm = this.formBuilder.group({
+      name:['', [Validators.required]],
+      sistemaSelect:['', [Validators.required]],
+      listSistemas: ['', [Validators.required]]
+    });
     this.ListaSistemasUsuario();
   }
 
@@ -51,17 +50,19 @@ export class CategoriaComponent {
 
   ListaSistemasUsuario() {
     this.sistemaService.ListarSistemasUsuario(this.autService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
-      var listaSistemaFinanceiro: [];
+      let listaSistemaFinanceiro: SelectModel[] = [];
       
       response.forEach(x => {
         var item = new SelectModel();
-        item.id = x.Id.toString();
+        item.id = x.id ? x.id.toString() : '';
         item.name = x.Nome;
 
         listaSistemaFinanceiro.push(item);
       });
 
       this.listSistemas = listaSistemaFinanceiro;
+    }, error => {
+      console.error('Erro ao listar sistemas do usuário:', error); // Log de erro para debug
     });
   }
 }
