@@ -75,16 +75,17 @@ export class CategoriaComponent implements OnInit {
   ListaSistemasUsuario() {
     this.sistemaService.ListarSistemasUsuario(this.authService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
       let listaSistemaFinanceiro: SelectModel[] = [];
-      
-      response.forEach(x => {
-        var item = new SelectModel();
-        item.id = x.id ? x.id.toString() : '';
-        item.name = x.nome;
+    
+    response.forEach(x => {
+      var item = new SelectModel();
+      item.id = x.id ? x.id.toString() : '';
+      item.name = x.nome;
 
-        listaSistemaFinanceiro.push(item);
-      });
+      listaSistemaFinanceiro.push(item);
+    });
 
-      this.listSistemas = listaSistemaFinanceiro;
+    this.listSistemas = listaSistemaFinanceiro;
+    console.log('Lista de Sistemas:', this.listSistemas); // Verifique se os itens estão sendo preenchidos corretamente
     }, error => {
       console.error('Erro ao listar sistemas do usuário:', error); // Log de erro para debug
     });
