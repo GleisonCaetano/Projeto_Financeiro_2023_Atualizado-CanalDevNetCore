@@ -1,5 +1,9 @@
 export class Categoria{
-    Id: number;
-    Nome: string;
-    SistemaId: number;
+    id: number = 0;
+    nome: string = "";
+    sistemaId: number = 0;
+    Excluido: boolean = false;
+
+    NomePropriedade: string = "";
+    Mensagem: string = "";
 }

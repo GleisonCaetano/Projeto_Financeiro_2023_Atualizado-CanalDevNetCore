@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environment";
 import { Categoria } from "../models/CategoriaModel";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class CategoriaService{
         return this.httpClient.post<Categoria>(`${this.baseUrl}/AdicionarCategoria`, categoria);
     }
 
-    ListarCategoriasUsuario(emailUsuario: string){
-        return this.httpClient.get(`${this.baseUrl}/ListarCategoriasUsuario?emailUsuario=${emailUsuario}`);
+    ListarCategoriasUsuario(emailUsuario: string) : Observable<Array<Categoria>>{
+        return this.httpClient.get<Array<Categoria>>(`${this.baseUrl}/ListarCategoriasUsuario?emailUsuario=${emailUsuario}`);
     }
 }

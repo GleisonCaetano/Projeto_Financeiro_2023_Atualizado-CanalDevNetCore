@@ -10,6 +10,8 @@ import { SistemaService } from '../../services/sistema.service';
 import { SistemaFinanceiro } from '../../models/SistemaFinanceiroModel';
 import { AuthService } from '../../services/auth.service';
 import { ItemsList } from '@ng-select/ng-select/lib/items-list';
+import { CategoriaService } from '../../services/categoria.service';
+import { Categoria } from '../../models/CategoriaModel';
 
 @Component({
   selector: 'categoria',
@@ -27,10 +29,12 @@ export class CategoriaComponent implements OnInit {
     public menuService: MenuService, 
     public formBuilder: FormBuilder, 
     public sistemaService: SistemaService, 
-    public autService: AuthService) {
+    public authService: AuthService, 
+    public categoriaService: CategoriaService) {
       this.categoriaForm = this.formBuilder.group({
-        name:['', [Validators.required]]
-      });
+        name:['', [Validators.required]],
+        sistemaSelect:['', [Validators.required]]
+      })
     }
   
   ngOnInit(){
@@ -45,11 +49,31 @@ export class CategoriaComponent implements OnInit {
   enviar(){
     debugger
     var dados = this.dadosForm();
-    alert(dados["name"].value);
+    let item = new Categoria();
+    item.id = 0;
+    item.nome = dados["name"].value;
+    item.Excluido = false;
+    
+    console.log('Sistema Selecionado:', this.sistemaSelect);
+
+    if (this.sistemaSelect && this.sistemaSelect.id) {
+      item.sistemaId = parseInt(this.sistemaSelect.id);
+    } else {
+      console.error('Sistema não selecionado ou ID não encontrado.');
+      return; // Adicione um retorno para evitar enviar o formulário se o ID não for válido
+    }
+
+    item.NomePropriedade = "";
+    item.Mensagem = "";
+    
+    this.categoriaService.AdicionarCategoria(item).subscribe((response: Categoria) => {
+      this.categoriaForm.reset();
+    },
+    (error) => console.error(error), () => {})
   }
 
   ListaSistemasUsuario() {
-    this.sistemaService.ListarSistemasUsuario(this.autService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
+    this.sistemaService.ListarSistemasUsuario(this.authService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
       let listaSistemaFinanceiro: SelectModel[] = [];
       
       response.forEach(x => {

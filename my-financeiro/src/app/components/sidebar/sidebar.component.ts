@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuService } from '../../services/menu.services';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'sidebar',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent {
   
-  constructor(private router: Router, public menuService: MenuService){}
+  constructor(private router: Router, public menuService: MenuService, private authService: AuthService){}
   
   selectMenu(menu:number){
     switch (menu) {
@@ -30,6 +31,11 @@ export class SidebarComponent {
 
       case 4:
         this.router.navigate(['/despesa'])
+        break;
+
+      case 100:
+        this.authService.limparDadosUsuario();
+        this.router.navigate(['/login']);
         break;
     
       default:
