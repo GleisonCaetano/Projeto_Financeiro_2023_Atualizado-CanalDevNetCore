@@ -106,6 +106,7 @@ export class DespesaComponent implements OnInit {
       });
 
       this.listCategorias = listaCategorias;
+      console.log('Lista de Sistemas:', this.listCategorias); // Verifique se os itens estão sendo preenchidos corretamente
     }, error => {
       console.error('Erro ao listar sistemas do usuário:', error); // Log de erro para debug
     });
