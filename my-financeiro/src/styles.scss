@@ -118,3 +118,120 @@ label{}
     min-height: 42px;
     align-items: center;
 }
+
+//Inclusão Tabela
+table {
+    width: 100%;
+
+    thead {
+        background: #e6e6e6;
+        color: #636363;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        height: 60px;
+
+        td {
+            padding: 0px 0px 8px 16px;
+        }
+    }
+
+    tbody {
+        td {
+            padding: 0px 0 0 16px;
+            color: #000;
+            font-family: "Poppins";
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            cursor: pointer;
+        }
+    }
+}
+
+.linha-table {
+    border-radius: 8px 8px 0px 0px;
+    height: 56px;
+}
+
+.linha-branca {
+    border-radius: 8px 8px 0px 0px;
+    background: #fff;
+}
+
+.linha-cinza {
+    background: #f9f7f7;
+}
+
+.header-info-2 {
+    border-bottom: 1px solid #f0f0f0;
+
+    @media screen and (max-width: 1020px) {
+        overflow: auto;
+    }
+}
+
+.cabec-buscar {
+    height: 55px;
+    border-radius: 8px 8px 0px 0px;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 21px 0 0;
+
+    div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    div input {
+        height: 25px;
+        padding-right: 30px;
+        border-radius: 59px;
+        background: #fff;
+        width: 129px;
+        height: 24px;
+        border: none;
+        padding: 0 27px 0 8px;
+    }
+
+    div i {
+        font-size: 16px;
+        margin-left: -25px;
+        cursor: pointer;
+    }
+}
+
+.tabela-footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.mostrar {
+    margin-left: 24px;
+    margin-right: 16px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #585656;
+}
+
+.container-pagination {
+    margin-left: auto;
+}
+
+::ng-deep .ngx-pagination .current {
+    padding: 0.1875rem 0.525rem !important;
+    background: linear-gradient(357.83deg, #3800b0 83.6%, #6c23e2 98.76%) !important;
+    color: #fefefe !important;
+    cursor: default !important;
+    border-radius: 5px !important;
+}

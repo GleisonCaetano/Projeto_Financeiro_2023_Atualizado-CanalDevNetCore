@@ -9,7 +9,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
   standalone: true,
   imports: [RouterOutlet, CommonModule, FormsModule, ReactiveFormsModule, NgxSpinnerModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent {

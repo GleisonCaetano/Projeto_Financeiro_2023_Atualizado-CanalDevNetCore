@@ -8,7 +8,7 @@ import { MenuService } from '../../services/menu.services';
   standalone: true,
   imports: [NavbarComponent, SidebarComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
   constructor(public menuService: MenuService){}

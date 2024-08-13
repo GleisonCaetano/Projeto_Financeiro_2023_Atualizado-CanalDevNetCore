@@ -1,12 +1,11 @@
 <navbar></navbar>
 <sidebar></sidebar>
 
-<div class="container-base">
+<div *ngIf="tipoTela == 2" class="container-base">
     <div class="content-page">
         <div class="card-header">
-            <div class="card-title">
-                Cadastro de Sistemas
-            </div>
+            <div class="card-title">Listagem de Sistemas</div>
+            <div class="card-title">Cadastro de Sistemas</div>
         </div>
 
         <form class="form-page" [formGroup]="sistemaForm" (submit)="enviar()">
@@ -26,5 +25,14 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<div *ngIf="tipoTela == 1" class="container-base">
+    <div class="content-page">
+        <div class="header-info-2">
+            <div class="card-title">Listagem de Sistemas</div>
+            <div class="card-title">Cadastro de Sistemas</div>
+        </div>
     </div>
 </div>

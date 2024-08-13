@@ -26,7 +26,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSlideToggleModule
   ],
   templateUrl: './despesa.component.html',
-  styleUrl: './despesa.component.scss'
+  styleUrls: ['./despesa.component.scss']
 })
 export class DespesaComponent implements OnInit {
   despesaForm!: FormGroup;

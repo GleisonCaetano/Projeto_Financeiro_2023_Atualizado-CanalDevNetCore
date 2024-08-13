@@ -13,10 +13,17 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [NavbarComponent, SidebarComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './sistema.component.html',
-  styleUrl: './sistema.component.scss'
+  styleUrls: ['./sistema.component.scss']
 })
 export class SistemaComponent implements OnInit {
   sistemaForm!: FormGroup;
+  tipoTela: number = 1; //1 = listagem, 2 = cadastro, 3 = edição
+  tableListSistemas: Array<SistemaFinanceiro> = [];
+  page: number = 1;
+  config: any;
+  paginacao: boolean = true;
+  itensPorPagina: number = 10;
+  id: string = "";
   
   constructor(
     public menuService: MenuService, 
@@ -27,9 +34,41 @@ export class SistemaComponent implements OnInit {
   
   ngOnInit(){
     this.menuService.menuSelecionado = 2;
+    this.configPage();
+    this.ListaSistemasUsuario();
     this.sistemaForm = this.formBuilder.group({
       name:['', [Validators.required]]
     })
+  }
+
+  configPage() {
+    this.id = this.gerarIdParaConfigDePaginacao();
+
+    this.config = {
+      id: this.id,
+      currentPage: this.page,
+      itensPerPage: this.itensPorPagina
+    }
+  }
+
+  gerarIdParaConfigDePaginacao(){
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  ListaSistemasUsuario() {
+    this.tipoTela = 1;
+
+    this.sistemaService.ListarSistemasUsuario(this.authService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
+      this.tableListSistemas = response;
+    },
+    (error) => console.error(error), () => {})
   }
 
   dadosForm(){

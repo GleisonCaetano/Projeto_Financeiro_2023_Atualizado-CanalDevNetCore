@@ -18,7 +18,7 @@ import { Categoria } from '../../models/CategoriaModel';
   standalone: true,
   imports: [NavbarComponent, SidebarComponent, ReactiveFormsModule, CommonModule, FormsModule, NgSelectModule],
   templateUrl: './categoria.component.html',
-  styleUrl: './categoria.component.scss'
+  styleUrls: ['./categoria.component.scss']
 })
 export class CategoriaComponent implements OnInit {
   categoriaForm!: FormGroup;
