@@ -67,10 +67,19 @@ label{}
             margin-bottom: 16px;
 
             .card-title{
-                color: #ffffff;
+                color: #fff;
                 padding: 16px;
                 font-size: 16px;
                 font-weight: 500;
+            }
+
+            .card-menu{
+                color: #fff;
+                padding-left: 16px;
+                font-size: 14px;
+                font-weight: 400;
+                text-decoration: underline;
+                cursor: pointer;
             }
         }
 

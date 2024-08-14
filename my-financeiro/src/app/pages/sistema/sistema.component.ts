@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.services';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SistemaFinanceiro } from '../../models/SistemaFinanceiroModel';
 import { SistemaService } from '../../services/sistema.service';
 import { AuthService } from '../../services/auth.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'sistema',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, ReactiveFormsModule, CommonModule],
+  imports: [NavbarComponent, SidebarComponent, ReactiveFormsModule, CommonModule, NgxPaginationModule, FormsModule, NgSelectModule, MatIconModule],
   templateUrl: './sistema.component.html',
   styleUrls: ['./sistema.component.scss']
 })
@@ -47,7 +50,7 @@ export class SistemaComponent implements OnInit {
     this.config = {
       id: this.id,
       currentPage: this.page,
-      itensPerPage: this.itensPorPagina
+      itemsPerPage: this.itensPorPagina
     }
   }
 
@@ -60,6 +63,22 @@ export class SistemaComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+
+  cadastro() {
+    this.tipoTela = 2;
+    this.sistemaForm.reset();
+  }
+
+  mudarItensPorPagina() {
+    this.page = 1;
+    this.config.currentPage = this.page;
+    this.config.itemsPerPage = this.itensPorPagina;
+  }
+
+  mudarPagina(event: any) {
+    this.page = event;
+    this.config.currentPage =this.page;
   }
 
   ListaSistemasUsuario() {
