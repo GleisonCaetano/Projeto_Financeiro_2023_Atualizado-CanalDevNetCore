@@ -25,6 +25,64 @@
 
             <div class="row">
                 <div class="group-row">
+                    <label>Mês Sistema</label>
+                    <input type="number" name="mes" id="mes" placeholder="Mês" formControlName="mes" required />
+                    <label class="error-input" *ngIf="sistemaForm.get('mes')?.errors?.['required'] && sistemaForm.get('mes')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Ano Sistema</label>
+                    <input type="number" name="ano" id="ano" placeholder="Ano" formControlName="ano" required />
+                    <label class="error-input" *ngIf="sistemaForm.get('ano')?.errors?.['required'] && sistemaForm.get('ano')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Dia Fechamento</label>
+                    <input type="number" name="diaFechamento" id="diaFechamento" placeholder="DiaFechamento" formControlName="diaFechamento" required />
+                    <label class="error-input" *ngIf="sistemaForm.get('diaFechamento')?.errors?.['required'] && sistemaForm.get('diaFechamento')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Mês Cópia</label>
+                    <input type="number" name="mesCopia" id="mesCopia" placeholder="mesCopia" formControlName="mesCopia" required />
+                    <label class="error-input" *ngIf="sistemaForm.get('mesCopia')?.errors?.['required'] && sistemaForm.get('mesCopia')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Ano Cópia</label>
+                    <input type="number" name="anoCopia" id="anoCopia" placeholder="AnoCopia" formControlName="anoCopia" required />
+                    <label class="error-input" *ngIf="sistemaForm.get('anoCopia')?.errors?.['required'] && sistemaForm.get('anoCopia')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <mat-slide-toggle class="group-slide" [color]="color" [checked]="checked" [disabled]="disabled" (change)="handleChangePago($event)">
+                        Gerar Cópia das Despesas?
+                    </mat-slide-toggle>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
                     <input type="submit" value="Salvar" class="btn-primary"/>
                 </div>
             </div>
@@ -54,7 +112,7 @@
                     class="linha-table" [ngClass]="{'linha-cinza': i % 2 == 0, 'linha-branca': i % 2 !== 0}">
                     <td>{{item.id}}</td>
                     <td>{{item.nome}}</td>
-                    <td>Edit</td>
+                    <td (click)="edicao(item.id)">Edit</td>
                 </tr>
                 </tbody>
             </table>

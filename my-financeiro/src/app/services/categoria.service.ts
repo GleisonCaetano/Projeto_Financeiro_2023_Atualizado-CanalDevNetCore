@@ -20,4 +20,12 @@ export class CategoriaService{
     ListarCategoriasUsuario(emailUsuario: string) : Observable<Array<Categoria>>{
         return this.httpClient.get<Array<Categoria>>(`${this.baseUrl}/ListarCategoriasUsuario?emailUsuario=${emailUsuario}`);
     }
+
+    ObterCategoria(id: number) : Observable<Categoria> {
+        return this.httpClient.get<Categoria>(`${this.baseUrl}/ObterCategoria?id=${id}`);
+    }
+
+    AtualizarCategoria(categoria: Categoria){
+        return this.httpClient.put<Categoria>(`${this.baseUrl}/AtualizarCategoria`, categoria);
+    }
 }

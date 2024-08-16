@@ -1,12 +1,11 @@
 <navbar></navbar>
 <sidebar></sidebar>
 
-<div class="container-base">
+<div *ngIf="tipoTela == 2" class="container-base">
     <div class="content-page">
         <div class="card-header">
-            <div class="card-title">
-                Cadastro de Categorias
-            </div>
+            <div class="card-title">Cadastro de Categoria</div>
+            <div class="card-menu" (click)="ListaCategoriasUsuario()">Listagem de Categorias</div>
         </div>
 
         <form class="form-page" [formGroup]="categoriaForm" (submit)="enviar()">
@@ -33,5 +32,50 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<div *ngIf="tipoTela == 1" class="container-base">
+    <div class="content-page">
+        <div class="header-info-2">
+            <div class="card-header">
+                <div class="card-title">Listagem de Categorias</div>
+                <div class="card-menu" (click)="cadastro()">Cadastro de Categoria</div>
+            </div>
+
+            <table [cellSpacing]="0" [cellPadding]="0">
+                <thead>
+                    <tr>
+                        <td>Código</td>
+                        <td>Nome</td>
+                        <td>Ação</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="select-item" *ngFor="let item of tableListCategorias | paginate: config; let i = index"
+                    class="linha-table" [ngClass]="{'linha-cinza': i % 2 == 0, 'linha-branca': i % 2 !== 0}">
+                    <td>{{item.id}}</td>
+                    <td>{{item.nome}}</td>
+                    <td (click)="edicao(item.id)">Edit</td>
+                </tr>
+                </tbody>
+            </table>
+            
+            <div class="tabela-footer" *ngIf="paginacao && tableListCategorias">
+                <label class="mostrar">Mostrar</label>
+                <ng-select (change)="mudarItensPorPagina()" [(ngModel)]="itensPorPagina" [clearable]="false" [searchable]="false" class="mostrar-drop">
+                    <ng-option [value]="10">10</ng-option>
+                    <ng-option [value]="50">50</ng-option>
+                    <ng-option [value]="100">100</ng-option>
+                </ng-select>
+                
+                <div class="container-pagination">
+                    <pagination-controls id="{{this.id}}" previousLabel="Anterior" nextLabel="Próximo"
+                    [responsive]="true" (pageChange)="mudarPagina($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

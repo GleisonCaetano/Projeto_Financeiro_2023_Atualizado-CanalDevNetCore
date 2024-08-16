@@ -24,4 +24,12 @@ export class SistemaService{
     CadastrarUsuarioNoSistema(sistemaId: number, emailUsuario: string){
         return this.httpClient.post<any>(`${this.baseUrl}/CadastrarUsuarioNoSistema?sistemaId=${sistemaId}&emailUsuario=${emailUsuario}`, null);
     }
+
+    ObterSistemaFinanceiro(id: number) : Observable<SistemaFinanceiro> {
+        return this.httpClient.get<SistemaFinanceiro>(`${this.baseUrl}/ObterSistemaFinanceiro?id=${id}`);
+    }
+
+    AtualizarSistemaFinanceiro(sistemaFinanceiro: SistemaFinanceiro){
+        return this.httpClient.put<SistemaFinanceiro>(`${this.baseUrl}/AtualizarSistemaFinanceiro`, sistemaFinanceiro);
+    }
 }
