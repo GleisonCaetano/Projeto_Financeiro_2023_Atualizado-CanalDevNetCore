@@ -1,18 +1,18 @@
 export class Despesa{
-    Id: number = 0;
-    Nome: string = "";
-    Valor: number = 0;
-    Mes: number = 0;
-    Ano: number = 0;
-    TipoDespesa: number = 0;
-    DataCadastro: Date = new Date();
-    DataAlteracao: Date = new Date();
-    DataPagamento: Date = new Date();
-    DataVencimento: Date = new Date();
-    Pago: boolean = false;
-    DespesaAtrasada: boolean = false;
-    CategoriaId: number = 0;
-    Excluido: boolean = false;
+    id: number = 0;
+    nome: string = "";
+    valor: number = 0;
+    mes: number = 0;
+    ano: number = 0;
+    tipoDespesa: number = 0;
+    dataCadastro: Date = new Date();
+    dataAlteracao: Date = new Date();
+    dataPagamento: Date = new Date();
+    dataVencimento: Date = new Date();
+    pago: boolean = false;
+    despesaAtrasada: boolean = false;
+    categoriaId: number = 0;
+    excluido: boolean = false;
 
     NomePropriedade: string = "";
     Mensagem: string = "";

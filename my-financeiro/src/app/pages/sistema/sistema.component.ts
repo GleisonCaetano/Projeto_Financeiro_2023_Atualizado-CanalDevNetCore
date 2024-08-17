@@ -55,7 +55,12 @@ export class SistemaComponent implements OnInit {
     this.configPage();
     this.ListaSistemasUsuario();
     this.sistemaForm = this.formBuilder.group({
-      name:['', [Validators.required]]
+      name:['', [Validators.required]],
+      mes:['', [Validators.required]],
+      ano:['', [Validators.required]],
+      diaFechamento:['', [Validators.required]],
+      mesCopia:['', [Validators.required]],
+      anoCopia:['', [Validators.required]]
     });
   }
 
@@ -111,16 +116,17 @@ export class SistemaComponent implements OnInit {
   }
 
   enviar() {
+    debugger
     var dados = this.dadosForm();
     
     if (this.itemEdicao) {
       this.itemEdicao.nome = dados["name"].value;
-      this.itemEdicao.Mes = dados["mes"].value;
-      this.itemEdicao.Ano = dados["ano"].value;
-      this.itemEdicao.DiaFechamento = dados["diaFechamento"].value;
-      this.itemEdicao.GerarCopiaDespesa = this.checked;
-      this.itemEdicao.MesCopia = dados["mesCopia"].value;
-      this.itemEdicao.AnoCopia = dados["anoCopia"].value;
+      this.itemEdicao.mes = dados["mes"].value;
+      this.itemEdicao.ano = dados["ano"].value;
+      this.itemEdicao.diaFechamento = dados["diaFechamento"].value;
+      this.itemEdicao.gerarCopiaDespesa = this.checked;
+      this.itemEdicao.mesCopia = dados["mesCopia"].value;
+      this.itemEdicao.anoCopia = dados["anoCopia"].value;
 
       this.itemEdicao.NomePropriedade = "";
       this.itemEdicao.Mensagem = "";
@@ -135,13 +141,13 @@ export class SistemaComponent implements OnInit {
       let item = new SistemaFinanceiro();
       item.id = 0;
       item.nome = dados["name"].value;
-      item.Mes = dados["mes"].value;
-      item.Ano = dados["ano"].value;
-      item.DiaFechamento = dados["diaFechamento"].value;
-      item.GerarCopiaDespesa = this.checked;
-      item.MesCopia = dados["mesCopia"].value;
-      item.AnoCopia = dados["anoCopia"].value;
-      item.Excluido = false;
+      item.mes = dados["mes"].value;
+      item.ano = dados["ano"].value;
+      item.diaFechamento = dados["diaFechamento"].value;
+      item.gerarCopiaDespesa = this.checked;
+      item.mesCopia = dados["mesCopia"].value;
+      item.anoCopia = dados["anoCopia"].value;
+      item.excluido = false;
 
       item.NomePropriedade = "";
       item.Mensagem = "";
@@ -162,19 +168,20 @@ export class SistemaComponent implements OnInit {
   }
   
   edicao(id: number) {
+    debugger
     this.sistemaService.ObterSistemaFinanceiro(id).subscribe((response: SistemaFinanceiro) => {
       if (response) {
         this.itemEdicao = response;
         this.tipoTela = 2;
 
         var dados = this.dadosForm();
-        dados["name"].setValue(this.itemEdicao.nome);
-        dados["mes"].setValue(this.itemEdicao.Mes);
-        dados["ano"].setValue(this.itemEdicao.Ano);
-        dados["diaFechamento"].setValue(this.itemEdicao.DiaFechamento);
-        this.checked = this.itemEdicao.GerarCopiaDespesa;
-        dados["mesCopia"].setValue(this.itemEdicao.MesCopia);
-        dados["anoCopia"].setValue(this.itemEdicao.AnoCopia);
+        dados["name"].setValue(this.itemEdicao.nome)
+        dados["mes"].setValue(this.itemEdicao.mes)
+        dados["ano"].setValue(this.itemEdicao.ano)
+        dados["diaFechamento"].setValue(this.itemEdicao.diaFechamento)
+        this.checked = this.itemEdicao.gerarCopiaDespesa
+        dados["mesCopia"].setValue(this.itemEdicao.mesCopia)
+        dados["anoCopia"].setValue(this.itemEdicao.anoCopia)
       }
     },
     (error) => console.error(error), () => {})

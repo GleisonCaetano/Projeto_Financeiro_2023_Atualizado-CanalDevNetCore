@@ -50,7 +50,6 @@ export class LoaderInterceptor implements HttpInterceptor{
             });
         }
         else {
-            debugger
             headers = new HttpHeaders()
             .append("accept", "application/json")
             .append("Content-Type", "application/json")

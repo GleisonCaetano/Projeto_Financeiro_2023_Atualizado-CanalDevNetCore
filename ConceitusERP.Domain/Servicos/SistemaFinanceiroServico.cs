@@ -38,7 +38,7 @@ namespace ConceitusERP.Domain.Servicos
 
             if (valido)
             {
-                sistemaFinanceiro.DiaFechamento = 1;
+                //sistemaFinanceiro.DiaFechamento = 1;
 
                 await _interfaceSistemaFinanceiro.Update(sistemaFinanceiro);
             }

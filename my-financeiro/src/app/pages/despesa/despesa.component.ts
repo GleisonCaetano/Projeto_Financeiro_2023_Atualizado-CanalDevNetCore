@@ -36,9 +36,6 @@ export class DespesaComponent implements OnInit {
   despesaForm!: FormGroup;
   listCategorias = new Array<SelectModel>();
   categoriaSelect = new SelectModel();
-  color = "accent";
-  checked = false;
-  disabled = false;
   tipoTela: number = 1; //1 = listagem, 2 = cadastro, 3 = edição
   tableListDespesas: Array<Despesa> = [];
   page: number = 1;
@@ -47,6 +44,9 @@ export class DespesaComponent implements OnInit {
   itensPorPagina: number = 10;
   id: string = "";
   itemEdicao!: Despesa | null;
+  color = "accent";
+  checked = false;
+  disabled = false;
   
   constructor(
     public menuService: MenuService, 
@@ -65,9 +65,9 @@ export class DespesaComponent implements OnInit {
   
   ngOnInit(){
     this.menuService.menuSelecionado = 4;
+    this.configPage();
     this.ListaCategorias();
     this.ListaDespesasUsuario();
-    this.configPage();
   }
 
   configPage() {
@@ -107,15 +107,6 @@ export class DespesaComponent implements OnInit {
     this.config.currentPage =this.page;
   }
 
-  ListaDespesasUsuario() {
-    this.tipoTela = 1;
-
-    this.despesaService.ListarDespesasUsuario(this.authService.getEmailUser()).subscribe((response: Array<Despesa>) => {
-      this.tableListDespesas = response;
-    },
-    (error) => console.error(error), () => {})
-  }
-
   dadosForm(){
     return this.despesaForm.controls;
   }
@@ -125,21 +116,12 @@ export class DespesaComponent implements OnInit {
     
     if (this.itemEdicao)
     {
-      this.itemEdicao.Id = 0;
-      this.itemEdicao.Nome = dados["name"].value;
-      this.itemEdicao.Valor = dados["valor"].value;
-      this.itemEdicao.DataVencimento = dados["data"].value;
-      this.itemEdicao.Pago = this.checked;
-      this.itemEdicao.Excluido = false;
-
-      console.log('Categoria Selecionada:', this.categoriaSelect);
-
-      if (this.categoriaSelect && this.categoriaSelect.id) {
-        this.itemEdicao.CategoriaId = parseInt(this.categoriaSelect.id);
-      } else {
-        console.error('Categoria não selecionada ou ID não encontrado.');
-        return; // Adicione um retorno para evitar enviar o formulário se o ID não for válido
-      }
+      this.itemEdicao.nome = dados["name"].value;
+      this.itemEdicao.valor = dados["valor"].value;
+      this.itemEdicao.dataVencimento = dados["data"].value;
+      this.itemEdicao.pago = this.checked;
+      this.itemEdicao.excluido = false;
+      this.itemEdicao.categoriaId = parseInt(this.categoriaSelect.id);
 
       this.itemEdicao.NomePropriedade = "";
       this.itemEdicao.Mensagem = "";
@@ -152,17 +134,17 @@ export class DespesaComponent implements OnInit {
     }
     else {
       let item = new Despesa();
-      item.Id = 0;
-      item.Nome = dados["name"].value;
-      item.Valor = dados["valor"].value;
-      item.DataVencimento = dados["data"].value;
-      item.Pago = this.checked;
-      item.Excluido = false;
+      item.id = 0;
+      item.nome = dados["name"].value;
+      item.valor = dados["valor"].value;
+      item.dataVencimento = dados["data"].value;
+      item.pago = this.checked;
+      item.excluido = false;
 
       console.log('Categoria Selecionada:', this.categoriaSelect);
 
       if (this.categoriaSelect && this.categoriaSelect.id) {
-        item.CategoriaId = parseInt(this.categoriaSelect.id);
+        item.categoriaId = parseInt(this.categoriaSelect.id);
       } else {
         console.error('Categoria não selecionada ou ID não encontrado.');
         return; // Adicione um retorno para evitar enviar o formulário se o ID não for válido
@@ -190,17 +172,37 @@ export class DespesaComponent implements OnInit {
         this.tipoTela = 2;
 
         var dados = this.dadosForm();
-        dados["name"].setValue(this.itemEdicao.Nome);
-        dados["categoriaSelect"].setValue(this.itemEdicao.CategoriaId);
-        dados["data"].setValue(this.itemEdicao.DataVencimento);
-        dados["valor"].setValue(this.itemEdicao.Valor);
-        this.checked = this.itemEdicao.Pago;
+        dados["name"].setValue(this.itemEdicao.nome);
+        this.ListaCategorias(response.categoriaId);
+        
+        var dateToString = response.dataVencimento.toString();
+        var dateFull = dateToString.split('-');
+        var dayFull = dateFull[2].split('T');
+        var day = dayFull[0];
+        var month = dateFull[1];
+        var year = dateFull[0];
+
+        var dateInput = year + '-' + month + '-' + day;
+        
+        dados["data"].setValue(dateInput);
+        dados["valor"].setValue(response.valor);
+        this.checked = response.pago;
       }
     },
     (error) => console.error(error), () => {})
   }
 
-  ListaCategorias() {
+  ListaDespesasUsuario() {
+    this.itemEdicao = null;
+    this.tipoTela = 1;
+
+    this.despesaService.ListarDespesasUsuario(this.authService.getEmailUser()).subscribe((response: Array<Despesa>) => {
+      this.tableListDespesas = response;
+    },
+    (error) => console.error(error), () => {})
+  }
+
+  ListaCategorias(id: number = 0) {
     this.categoriaService.ListarCategoriasUsuario(this.authService.getEmailUser()).subscribe((response: Array<Categoria>) => {
       let listaCategorias: SelectModel[] = [];
       
@@ -208,14 +210,17 @@ export class DespesaComponent implements OnInit {
         var item = new SelectModel();
         item.id = x.id ? x.id.toString() : '';
         item.name = x.nome;
-
         listaCategorias.push(item);
+
+        if (id && id == x.id) {
+          this.categoriaSelect = item;
+        }
       });
 
       this.listCategorias = listaCategorias;
-      console.log('Lista de Sistemas:', this.listCategorias); // Verifique se os itens estão sendo preenchidos corretamente
+      console.log('Lista de Categorias:', this.listCategorias); // Verifique se os itens estão sendo preenchidos corretamente
     }, error => {
-      console.error('Erro ao listar sistemas do usuário:', error); // Log de erro para debug
+      console.error('Erro ao listar categorias do usuário:', error); // Log de erro para debug
     });
   }
 }

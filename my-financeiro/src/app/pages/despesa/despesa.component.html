@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="group-row">
                     <label>Nome</label>
-                    <input type="text" name="name" id="name" placeholder="Digite o nome do sistema" formControlName="name" required />
+                    <input type="text" name="name" id="name" placeholder="Digite o nome da despesa" formControlName="name" required />
                     <label class="error-input" *ngIf="despesaForm.get('name')?.errors?.['required'] && despesaForm.get('name')?.touched">
                         Campo Obrigatório!
                     </label>
@@ -83,9 +83,9 @@
                 <tbody>
                     <tr class="select-item" *ngFor="let item of tableListDespesas | paginate: config; let i = index"
                     class="linha-table" [ngClass]="{'linha-cinza': i % 2 == 0, 'linha-branca': i % 2 !== 0}">
-                    <td>{{item.Id}}</td>
-                    <td>{{item.Nome}}</td>
-                    <td (click)="edicao(item.Id)">Edit</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nome}}</td>
+                    <td (click)="edicao(item.id)">Edit</td>
                 </tr>
                 </tbody>
             </table>

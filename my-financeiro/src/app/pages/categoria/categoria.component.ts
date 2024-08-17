@@ -99,16 +99,6 @@ export class CategoriaComponent implements OnInit {
     this.config.currentPage =this.page;
   }
 
-  ListaCategoriasUsuario() {
-    this.itemEdicao = null;
-    this.tipoTela = 1;
-
-    this.categoriaService.ListarCategoriasUsuario(this.authService.getEmailUser()).subscribe((response: Array<Categoria>) => {
-      this.tableListCategorias = response;
-    },
-    (error) => console.error(error), () => {})
-  }
-
   dadosForm(){
     return this.categoriaForm.controls;
   }
@@ -118,15 +108,7 @@ export class CategoriaComponent implements OnInit {
     
     if (this.itemEdicao) {
       this.itemEdicao.nome = dados["name"].value;
-
-      console.log('Sistema Selecionado:', this.sistemaSelect);
-
-      if (this.sistemaSelect && this.sistemaSelect.id) {
-        this.itemEdicao.sistemaId = parseInt(this.sistemaSelect.id);
-      } else {
-        console.error('Sistema não selecionado ou ID não encontrado.');
-        return; // Adicione um retorno para evitar enviar o formulário se o ID não for válido
-      }
+      this.itemEdicao.sistemaId = parseInt(this.sistemaSelect.id);
 
       this.itemEdicao.NomePropriedade = "";
       this.itemEdicao.Mensagem = "";
@@ -141,7 +123,7 @@ export class CategoriaComponent implements OnInit {
       let item = new Categoria();
       item.id = 0;
       item.nome = dados["name"].value;
-      item.Excluido = false;
+      item.excluido = false;
       
       console.log('Sistema Selecionado:', this.sistemaSelect);
 
@@ -170,14 +152,24 @@ export class CategoriaComponent implements OnInit {
         this.tipoTela = 2;
 
         var dados = this.dadosForm();
-        dados["name"].setValue(this.itemEdicao.nome);
-        dados["sistemaSelect"].setValue(this.itemEdicao.sistemaId);
+        dados["name"].setValue(this.itemEdicao.nome)
+        this.ListaSistemasUsuario(response.sistemaId)
       }
     },
     (error) => console.error(error), () => {})
   }
 
-  ListaSistemasUsuario() {
+  ListaCategoriasUsuario() {
+    this.itemEdicao = null;
+    this.tipoTela = 1;
+
+    this.categoriaService.ListarCategoriasUsuario(this.authService.getEmailUser()).subscribe((response: Array<Categoria>) => {
+      this.tableListCategorias = response;
+    },
+    (error) => console.error(error), () => {})
+  }
+
+  ListaSistemasUsuario(id: number = 0) {
     this.sistemaService.ListarSistemasUsuario(this.authService.getEmailUser()).subscribe((response: Array<SistemaFinanceiro>) => {
       let listaSistemaFinanceiro: SelectModel[] = [];
     
@@ -185,8 +177,11 @@ export class CategoriaComponent implements OnInit {
       var item = new SelectModel();
       item.id = x.id ? x.id.toString() : '';
       item.name = x.nome;
-
       listaSistemaFinanceiro.push(item);
+
+      if (id && id == x.id) {
+        this.sistemaSelect = item;
+      }
     });
 
     this.listSistemas = listaSistemaFinanceiro;
