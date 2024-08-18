@@ -11,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UsuarioSistemaFinanceiro } from '../../services/usuario-sistema.service';
 
 @Component({
   selector: 'sistema',
@@ -41,13 +42,24 @@ export class SistemaComponent implements OnInit {
   itemEdicao!: SistemaFinanceiro | null;
   checked = false;
   color = "accent";
-  disabled = false; 
+  disabled = false;
+
+  tableListUsuariosSistema: Array<any> = [];
+  id2: string = "";
+  page2: number = 1;
+  config2: any;
+  paginacao2: boolean = true;
+  itensPorPagina2: number = 10;
+  emailUsuarioSistema: string = "";
+  emailUsuarioSistemaValid: boolean = true;
+  textValid: string = "Campo Obrigatório!";
   
   constructor(
     public menuService: MenuService, 
     public formBuilder: FormBuilder, 
     public sistemaService: SistemaService, 
-    public authService: AuthService
+    public authService: AuthService,
+    public usuarioSistemaFinanceiro: UsuarioSistemaFinanceiro
   ) {}
   
   ngOnInit(){
@@ -71,6 +83,12 @@ export class SistemaComponent implements OnInit {
       id: this.id,
       currentPage: this.page,
       itemsPerPage: this.itensPorPagina
+    }
+
+    this.config2 = {
+      id: this.id2,
+      currentPage: this.page2,
+      itemsPerPage: this.itensPorPagina2
     }
   }
 
@@ -101,6 +119,17 @@ export class SistemaComponent implements OnInit {
     this.config.currentPage =this.page;
   }
 
+  mudarItensPorPagina2() {
+    this.page2 = 1;
+    this.config2.currentPage = this.page2;
+    this.config2.itemsPerPage = this.itensPorPagina2;
+  }
+
+  mudarPagina2(event: any) {
+    this.page2 = event;
+    this.config2.currentPage =this.page2;
+  }
+
   ListaSistemasUsuario() {
     this.itemEdicao = null;
     this.tipoTela = 1;
@@ -116,7 +145,6 @@ export class SistemaComponent implements OnInit {
   }
 
   enviar() {
-    debugger
     var dados = this.dadosForm();
     
     if (this.itemEdicao) {
@@ -168,7 +196,6 @@ export class SistemaComponent implements OnInit {
   }
   
   edicao(id: number) {
-    debugger
     this.sistemaService.ObterSistemaFinanceiro(id).subscribe((response: SistemaFinanceiro) => {
       if (response) {
         this.itemEdicao = response;
@@ -182,8 +209,49 @@ export class SistemaComponent implements OnInit {
         this.checked = this.itemEdicao.gerarCopiaDespesa
         dados["mesCopia"].setValue(this.itemEdicao.mesCopia)
         dados["anoCopia"].setValue(this.itemEdicao.anoCopia)
+
+        this.ListaUsuariosSistema();
       }
     },
     (error) => console.error(error), () => {})
+  }
+
+  ListaUsuariosSistema() {
+    if(this.itemEdicao) {
+      this.usuarioSistemaFinanceiro.ListarUsuariosSistema(this.itemEdicao.id).subscribe((response: Array<any>) => {
+        this.tableListUsuariosSistema = response;
+      })
+    }
+  }
+
+  excluir(id: number) {
+    this.usuarioSistemaFinanceiro.DeletarUsuarioSistemaFinanceiro(id).subscribe((response: SistemaFinanceiro) => {
+      if (response) {
+        if(this.itemEdicao) {
+          this.edicao(this.itemEdicao.id)
+          this.emailUsuarioSistema = "";
+        }
+      }
+    }, (error) => console.error(error), () => {})
+  }
+
+  addUsuarioSistema() {
+    this.emailUsuarioSistemaValid = true;
+
+    if (!this.emailUsuarioSistema) {
+      this.emailUsuarioSistemaValid = false;
+    }
+    else {
+      if(this.itemEdicao) {
+        this.sistemaService.CadastrarUsuarioNoSistema(this.itemEdicao.id, this.emailUsuarioSistema).subscribe((response: any) => {
+          if (response) {
+            if(this.itemEdicao) {
+              this.edicao(this.itemEdicao.id)
+              this.emailUsuarioSistema = "";
+            }
+          }
+        }, (error) => console.error(error), () => {})
+      }
+    }
   }
 }
