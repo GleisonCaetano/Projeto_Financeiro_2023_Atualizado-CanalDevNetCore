@@ -69,5 +69,12 @@ namespace ConceitusERP.Web.Controllers
 
             return true;
         }
+
+        [HttpPost("/api/ExecutarCopiaDespesasSistemaFinanceiro")]
+        [Produces("application/json")]
+        public async Task<object> ExecutarCopiaDespesasSistemaFinanceiro()
+        {
+            return await _interfaceSistemaFinanceiro.ExecutarCopiaDespesasSistemaFinanceiro();
+        }
     }
 }
