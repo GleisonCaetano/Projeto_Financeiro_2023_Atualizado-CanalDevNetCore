@@ -28,4 +28,8 @@ export class DespesaService{
     AtualizarDespesa(despesa: Despesa) {
         return this.httpClient.put<Despesa>(`${this.baseUrl}/AtualizarDespesa`, despesa);
     }
+
+    CarregarGraficos(emailUsuario: string) : Observable<Array<Despesa>>{
+        return this.httpClient.get<Array<Despesa>>(`${this.baseUrl}/CarregarGraficos?emailUsuario=${emailUsuario}`);
+    }
 }

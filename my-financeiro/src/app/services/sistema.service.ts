@@ -32,4 +32,8 @@ export class SistemaService{
     AtualizarSistemaFinanceiro(sistemaFinanceiro: SistemaFinanceiro){
         return this.httpClient.put<SistemaFinanceiro>(`${this.baseUrl}/AtualizarSistemaFinanceiro`, sistemaFinanceiro);
     }
+
+    ExecutarCopiaDespesasSistemaFinanceiro(){
+        return this.httpClient.post<any>(`${this.baseUrl}/ExecutarCopiaDespesasSistemaFinanceiro`, null);
+    }
 }

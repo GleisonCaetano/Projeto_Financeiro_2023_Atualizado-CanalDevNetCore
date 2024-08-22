@@ -139,6 +139,7 @@ export class DespesaComponent implements OnInit {
       item.valor = dados["valor"].value;
       item.dataVencimento = dados["data"].value;
       item.pago = this.checked;
+      item.tipoDespesa = 1;
       item.excluido = false;
 
       console.log('Categoria Selecionada:', this.categoriaSelect);

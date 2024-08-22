@@ -6,14 +6,68 @@
         <div class="container-cards">
             <div class="card">
                 <div class="title">
-                    <div class="card-icon"></div>
+                    <div class="card-icon blue"></div>
                     <div class="card-category">Investimentos</div>
-                    <h3 class="card-title">R$<span id="Investimento"></span></h3>
+                    <h3 class="card-title">R$<span id="Investimento">{{objetoGrafico.Investimentos}}</span></h3>
                 </div>
 
                 <div class="card-footer">
                     <div class="arrow"></div>
                     <div class="text-info">off</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">
+                    <div class="card-icon green"></div>
+                    <div class="card-category">Despesas Pagas</div>
+                    <h3 class="card-title">R$<span id="DespesasPagas">{{objetoGrafico.Despesas_Pagas}}</span></h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="arrow"></div>
+                    <div class="text-info">Acessar mês</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">
+                    <div class="card-icon orange"></div>
+                    <div class="card-category">Despesas a Pagar</div>
+                    <h3 class="card-title">R$<span id="DespesasAPagar">{{objetoGrafico.Despesas_Pendentes}}</span></h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="arrow"></div>
+                    <div class="text-info">Acessar mês</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-cards">
+            <div class="card">
+                <div class="title">
+                    <div class="card-icon red"></div>
+                    <div class="card-category">Despesas Atrasadas</div>
+                    <h3 class="card-title">R$<span id="DespesasAtrasadas">{{objetoGrafico.Despesas_NaoPagasMesesAnteriores}}</span></h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="arrow"></div>
+                    <div class="text-info">Verificar despesas atrasadas</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">
+                    <div class="card-icon red"></div>
+                    <div class="card-category">Executar Cópia das Despesas</div>
+                    <h3 class="card-title">On<span id="Copiar Despesas"></span></h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="arrow"></div>
+                    <div class="text-info" (click)="ExecuteCopiaDespesasSistemaFinanceiro()">Executar</div>
                 </div>
             </div>
         </div>
